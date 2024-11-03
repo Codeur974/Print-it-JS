@@ -25,12 +25,6 @@ const tagLine = document.querySelector(".tagline");
 const dots = document.querySelector(".dots");
 let index = 0;
 
-const updateSlide = () => {
-  bannerImg.src = `./assets/images/slideshow/${slides[index].image}`;
-  tagLine.innerHTML = slides[index].tagLine;
-  initializeAndUpdateDots();
-};
-
 const initializeAndUpdateDots = () => {
   // Supprimer tous les points de navigation existants
   dots.innerHTML = "";
@@ -46,6 +40,13 @@ const initializeAndUpdateDots = () => {
     dots.appendChild(dotElt);
   });
 };
+
+const updateSlide = () => {
+  bannerImg.src = `./assets/images/slideshow/${slides[index].image}`;
+  tagLine.innerHTML = slides[index].tagLine;
+  initializeAndUpdateDots();
+};
+
 const clickOnArrow = (direction) => {
   if (direction === "left") {
     index = (index - 1 + slides.length) % slides.length;
