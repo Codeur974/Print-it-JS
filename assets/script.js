@@ -28,14 +28,24 @@ let index = 0;
 const updateSlide = () => {
   bannerImg.src = `./assets/images/slideshow/${slides[index].image}`;
   tagLine.innerHTML = slides[index].tagLine;
-  dots.querySelectorAll(".dot").forEach((dot, i) => {
-    dot.classList.remove("dot_selected");
-    if (i === index) {
-      dot.classList.add("dot_selected");
-    }
-  });
+  initializeAndUpdateDots();
 };
 
+const initializeAndUpdateDots = () => {
+  // Supprimer tous les points de navigation existants
+  dots.innerHTML = "";
+
+  // Créer et mettre à jour les points de navigation
+  slides.forEach((_, i) => {
+    const dotElt = document.createElement("div");
+    dotElt.classList.add("dot");
+    console.log(index);
+    if (i === index) {
+      dotElt.classList.add("dot_selected");
+    }
+    dots.appendChild(dotElt);
+  });
+};
 const clickOnArrow = (direction) => {
   if (direction === "left") {
     index = (index - 1 + slides.length) % slides.length;
@@ -48,14 +58,6 @@ const clickOnArrow = (direction) => {
 arrow_left.addEventListener("click", () => clickOnArrow("left"));
 arrow_right.addEventListener("click", () => clickOnArrow("right"));
 
-slides.forEach((_, i) => {
-  const dotElt = document.createElement("div");
-  dotElt.classList.add("dot");
-  if (i === index) {
-    dotElt.classList.add("dot_selected");
-  }
-  dots.appendChild(dotElt);
-});
-
 // Initialiser la première diapositive
+
 updateSlide();
